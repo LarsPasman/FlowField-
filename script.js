@@ -1,7 +1,6 @@
 var points = []
 //mult is om de lijnen minder snel te laten ronddraaien
-//je kan met mult rondspelen om de lijnenrichting te veranderen (0.005 standaard)
-var mult = 0.005
+var mult;
 
 //random kleuren
 var r1;
@@ -12,14 +11,15 @@ var b1;
 var b2;
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth - 15, windowHeight - 15);
   background(30);
   angleMode(DEGREES);
   noiseDetail(1);
 
 //loop om de punten vast te stellen 
   //je kan rondspelen met de density van de ballen
- var density = 30
+ var density = random(30,80);
+  console.log(density)
  var space = width / density
 
   for(var x=0; x < width; x += space){
@@ -29,13 +29,16 @@ function setup() {
     }
   }
 
+  //random kleuren
   r1 = random(255);
   r2 = random(255);
   g1 = random(255);
   g2 = random(255);
   b1 = random(255);
   b2 = random(255);
-  
+
+  // random mult
+  mult = random(0.002,0.01)
 }
 
 function draw() {
@@ -67,3 +70,15 @@ function windowResized() {
   points = [];
   setup();
 }
+
+//als je muis klikt kan je de flowfield opslaan
+function mouseClicked(){
+
+  saveCanvas('FlowfieldByLars', 'png');
+}
+
+// drawBoxes(){
+//   stroke(255);
+//   strokeWeight(3);
+//   rect(windowWidth/2+)
+// }
